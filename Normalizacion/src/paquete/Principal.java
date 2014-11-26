@@ -4,19 +4,7 @@
  */
 package paquete;
 
-import edu.uci.ics.jung.algorithms.layout.FRLayout;
-import edu.uci.ics.jung.algorithms.layout.Layout;
-import edu.uci.ics.jung.graph.DirectedSparseGraph;
-import edu.uci.ics.jung.graph.Graph;
-import edu.uci.ics.jung.visualization.BasicVisualizationServer;
-import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
-import edu.uci.ics.jung.visualization.renderers.Renderer;
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Paint;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -26,8 +14,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import org.apache.commons.collections15.Transformer;
-import org.apache.commons.collections15.functors.ConstantTransformer;
 
 /**
  *
@@ -76,6 +62,7 @@ public class Principal extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         txtPK = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        btnClaves = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(21, 217));
@@ -152,6 +139,13 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel3.setText("Clave Primaria");
 
+        btnClaves.setText("Ver claves candidatas");
+        btnClaves.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnClavesMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -195,8 +189,9 @@ public class Principal extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtPK)))))
-                .addContainerGap(40, Short.MAX_VALUE))
+                                .addComponent(txtPK))
+                            .addComponent(btnClaves))))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,7 +224,9 @@ public class Principal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnClearDeterminantes)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnAgregarDF)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAgregarDF)
+                            .addComponent(btnClaves))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -354,13 +351,17 @@ public class Principal extends javax.swing.JFrame {
                 }
             }
             //Si la key ya existe entonces agregar "determinado" al valor de esa key
-            if (m.containsKey(determinante)) {
-                HashSet<String> temp = m.get(determinante);
-                temp.addAll(determinado);
-                m.put(determinante, temp);
-            } //Si la key no existe
-            else {
-                m.put(determinante, determinado);
+            if (!determinante.equals(determinado)) {
+
+
+                if (m.containsKey(determinante)) {
+                    HashSet<String> temp = m.get(determinante);
+                    temp.addAll(determinado);
+                    m.put(determinante, temp);
+                } //Si la key no existe
+                else {
+                    m.put(determinante, determinado);
+                }
             }
             //Llenar el JList
             DefaultListModel modelo = new DefaultListModel();
@@ -418,6 +419,21 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1MouseClicked
 
+    private void btnClavesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClavesMouseClicked
+        // TODO add your handling code here:
+        HashSet<String> superClave=new HashSet();
+        //Agregarle a la superclave todas las keys
+        Set set = m.entrySet();
+        Iterator it = set.iterator();
+        while (it.hasNext()) {
+            Map.Entry entry = (Map.Entry) it.next();
+           superClave.addAll((HashSet)entry.getKey());
+        }
+        for (int i = 0; i < superClave.size(); i++) {
+            System.out.println(superClave.toArray()[i]);
+        }
+    }//GEN-LAST:event_btnClavesMouseClicked
+
     private void actualizarComboBox() {
         DefaultListModel mod = new DefaultListModel();
         DefaultComboBoxModel modelo = new DefaultComboBoxModel();
@@ -471,6 +487,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnAddDeterminado;
     private javax.swing.JButton btnAddDeterminante;
     private javax.swing.JButton btnAgregarDF;
+    private javax.swing.JButton btnClaves;
     private javax.swing.JButton btnClearDeterminantes;
     private javax.swing.JButton btnGrafo;
     private javax.swing.JButton btnLimpiarDeterminados;
@@ -493,7 +510,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField txtAtributo;
     private javax.swing.JTextField txtPK;
     // End of variables declaration//GEN-END:variables
-    Graph g = new DirectedSparseGraph();
     ArrayList<String> atributos = new ArrayList();
     Hashtable<HashSet, HashSet> m = new Hashtable<>();
 }
