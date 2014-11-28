@@ -108,6 +108,12 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        txtAtributo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtAtributoKeyPressed(evt);
+            }
+        });
+
         jLabel1.setText("Atributo");
 
         jScrollPane3.setViewportView(lstAtributos);
@@ -261,24 +267,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnAddAtributoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddAtributoMouseClicked
         // TODO add your handling code here
-        if (!txtAtributo.getText().isEmpty()) {
-            boolean existe = false;
-            existe = false;
-            String nombre = txtAtributo.getText();
-            for (int i = 0; i < atributos.size(); i++) {
-                if (atributos.get(i).equals(nombre)) {
-                    JOptionPane.showMessageDialog(null, "El atributo ya existe, ingrese otro nombre...");
-                    txtAtributo.setText("");
-                    existe = true;
-                    break;
-                }
-            }
-            if (!existe) {
-                atributos.add(nombre);
-                actualizarComboBox();
-                txtAtributo.setText("");
-            }
-        }
+        addAtributo();
     }//GEN-LAST:event_btnAddAtributoMouseClicked
 
     private void btnAddDeterminanteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddDeterminanteMouseClicked
@@ -421,18 +410,100 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnClavesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClavesMouseClicked
         // TODO add your handling code here:
-        HashSet<String> superClave=new HashSet();
+        HashSet<String> claveCandidata = new HashSet();
+        HashSet<String> values = new HashSet();
         //Agregarle a la superclave todas las keys
         Set set = m.entrySet();
         Iterator it = set.iterator();
+        int cont = 0;
         while (it.hasNext()) {
             Map.Entry entry = (Map.Entry) it.next();
-           superClave.addAll((HashSet)entry.getKey());
+            //Si es el primer elemento
+            if (cont == 0) {
+                claveCandidata.addAll((HashSet) entry.getKey());
+                //Agregar la clave misma
+                values.addAll(claveCandidata);
+                //Agregar el valor actual
+                values.addAll((HashSet) entry.getValue());
+                System.out.println("");
+            } else {
+                //Si el determinante actual está contenido en values
+                //agregar a values los atributos que no estan contenidos
+                for (int i = 0; i < ((HashSet) entry.getKey()).toArray().length; i++) {
+                    if (!values.contains((String) ((HashSet) entry.getKey()).toArray()[i])) {
+                        claveCandidata.add((String) ((HashSet) entry.getKey()).toArray()[i]);
+                        values.addAll((HashSet) entry.getKey());
+                        for (int j = 0; j < ((HashSet) entry.getValue()).toArray().length; j++) {
+                            if (claveCandidata.contains((String) ((HashSet) entry.getValue()).toArray()[j])) {
+                                claveCandidata.remove((String) ((HashSet) entry.getValue()).toArray()[j]);
+                                System.out.println("ELIMINA");
+                            } else {
+                                values.addAll((HashSet) entry.getValue());
+                            }
+                        }
+                    } else {
+                        //Si values contiene la clave actual
+                        //Si values contiene toda la clave
+                        if (values.containsAll((HashSet) entry.getValue())) {
+                            System.out.println("111111111");
+                            if (((HashSet) entry.getKey()).size() == 1) {
+                                System.out.println("2222222");
+                                for (int j = 0; j < ((HashSet) entry.getValue()).toArray().length; j++) {
+                                    if (claveCandidata.contains((String) ((HashSet) entry.getValue()).toArray()[j])) {
+                                        claveCandidata.remove((String) ((HashSet) entry.getValue()).toArray()[j]);
+                                        System.out.println("ELIMINA");
+                                    } else {
+                                        values.addAll((HashSet) entry.getValue());
+                                    }
+                                }
+                            }
+                            //Hay un ciclo
+                            //si no hay mas DF entonces volver a correr el algoritmo desde otro inicio
+                            //el algoritmo se debe dejar de correr hasta que vuelva a encontrar una clave que ya había encontrado
+                        } else {
+                            for (int j = 0; j < ((HashSet) entry.getValue()).toArray().length; j++) {
+                                if (claveCandidata.contains((String) ((HashSet) entry.getValue()).toArray()[j])) {
+                                    claveCandidata.remove((String) ((HashSet) entry.getValue()).toArray()[j]);
+                                    System.out.println("ELIMINA");
+                                } else {
+
+                                    values.addAll((HashSet) entry.getValue());
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            System.out.println("CONT=" + cont);
+            System.out.println("clavecandidata");
+            for (int i = 0; i < claveCandidata.size(); i++) {
+                System.out.print(claveCandidata.toArray()[i] + " ");
+            }
+            System.out.println("determina a");
+            for (int i = 0; i < values.size(); i++) {
+                System.out.print(values.toArray()[i] + " ");
+            }
+            System.out.println("\n\n");
+            cont++;
         }
-        for (int i = 0; i < superClave.size(); i++) {
-            System.out.println(superClave.toArray()[i]);
-        }
+        System.out.println("Resultado final");
+        for (int i = 0; i < claveCandidata.size(); i++) {
+            System.out.println(claveCandidata.toArray()[i]);
+        }/*
+         HashSet<HashSet> claves = new HashSet();
+         claves = ClavesCandidatas(0, claves);
+         System.out.println("DESPUES DEL METODO");
+         for (int i = 0; i < claves.size(); i++) {
+         System.out.println(claves.toArray()[i]);
+         }*/
     }//GEN-LAST:event_btnClavesMouseClicked
+
+    private void txtAtributoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAtributoKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == 10) {
+            addAtributo();
+        }
+    }//GEN-LAST:event_txtAtributoKeyPressed
 
     private void actualizarComboBox() {
         DefaultListModel mod = new DefaultListModel();
@@ -447,6 +518,29 @@ public class Principal extends javax.swing.JFrame {
         cmbDeterminados.setModel(modelo1);
         lstAtributos.setModel(mod);
     }
+
+    private void addAtributo() {
+        if (!txtAtributo.getText().isEmpty()) {
+            boolean existe = false;
+            existe = false;
+            String nombre = txtAtributo.getText();
+            for (int i = 0; i < atributos.size(); i++) {
+                if (atributos.get(i).equals(nombre)) {
+                    JOptionPane.showMessageDialog(null, "El atributo ya existe, ingrese otro nombre...");
+                    txtAtributo.setText("");
+                    existe = true;
+                    break;
+                }
+            }
+            if (!existe) {
+                atributos.add(nombre);
+                actualizarComboBox();
+                txtAtributo.setText("");
+            }
+        }
+    }
+
+    
 
     /**
      * @param args the command line arguments
@@ -512,4 +606,5 @@ public class Principal extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     ArrayList<String> atributos = new ArrayList();
     Hashtable<HashSet, HashSet> m = new Hashtable<>();
+    //HashSet<HashSet> claves = new HashSet();
 }
