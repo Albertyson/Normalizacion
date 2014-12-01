@@ -5,6 +5,7 @@
 package paquete;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -58,11 +59,26 @@ public class Principal extends javax.swing.JFrame {
         btnAgregarDF = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         lstDependencias = new javax.swing.JList();
-        btnGrafo = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         txtPK = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         btnClaves = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        txtNombreEsquema = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        txtNombreAtributo = new javax.swing.JTextField();
+        txtEsquema = new javax.swing.JTextField();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
+        jLabel6 = new javax.swing.JLabel();
+        btnNormalizar = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jEditorPane1 = new javax.swing.JEditorPane();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(21, 217));
@@ -127,20 +143,6 @@ public class Principal extends javax.swing.JFrame {
 
         jScrollPane4.setViewportView(lstDependencias);
 
-        btnGrafo.setText("Ver Grafo");
-        btnGrafo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnGrafoMouseClicked(evt);
-            }
-        });
-
-        jButton1.setText("Normalizar a 3FN");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-
         txtPK.setEnabled(false);
 
         jLabel3.setText("Clave Primaria");
@@ -184,20 +186,17 @@ public class Principal extends javax.swing.JFrame {
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAgregarDF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnGrafo)
-                            .addComponent(jButton1)
+                            .addComponent(btnAgregarDF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane4))
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtPK))
                             .addComponent(btnClaves))))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(228, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,35 +234,272 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(btnClaves))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnGrafo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(63, 63, 63)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         jTabbedPane1.addTab("Parte 1", jPanel1);
 
+        jPanel2.setPreferredSize(new java.awt.Dimension(655, 541));
+
+        jLabel4.setText("Nombre del esquema relacional");
+
+        jButton2.setText("Agregar Esquema");
+
+        jLabel5.setText("Atributo");
+
+        txtEsquema.setEnabled(false);
+
+        jScrollPane5.setViewportView(jList1);
+
+        jLabel6.setText("Esquemas relacionales sin normalizar");
+
+        btnNormalizar.setText("Normalizar");
+
+        jLabel7.setText("Esquema relacional");
+
+        jLabel8.setText("Clave primaria");
+
+        jScrollPane6.setViewportView(jEditorPane1);
+
+        jLabel9.setText("Esquemas relacionales normalizados");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2)
+                            .addComponent(btnNormalizar)))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtNombreAtributo, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                        .addComponent(txtNombreEsquema)
+                        .addComponent(jTextField1))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(113, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtNombreEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtNombreAtributo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNormalizar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addContainerGap(134, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Parte 2", jPanel2);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnClavesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClavesMouseClicked
+        // TODO add your handling code here:
+        claves();
+        /*HashSet<String> claveCandidata = new HashSet();
+        HashSet<String> values = new HashSet();
+        //Agregarle a la superclave todas las keys
+        Set set = m.entrySet();
+        Iterator it = set.iterator();
+        int cont = 0;
+        while (it.hasNext()) {
+            Map.Entry entry = (Map.Entry) it.next();
+            //Si es el primer elemento
+            if (cont == 0) {
+                claveCandidata.addAll((HashSet) entry.getKey());
+                //Agregar la clave misma
+                values.addAll(claveCandidata);
+                //Agregar el valor actual
+                values.addAll((HashSet) entry.getValue());
+                System.out.println("");
+            } else {
+                //Si el determinante actual está contenido en values
+                //agregar a values los atributos que no estan contenidos
+                for (int i = 0; i < ((HashSet) entry.getKey()).toArray().length; i++) {
+                    if (!values.contains((String) ((HashSet) entry.getKey()).toArray()[i])) {
+                        System.out.println("1. " + values + "No contiene" + ((HashSet) entry.getKey()).toArray()[i]);
+                        claveCandidata.add((String) ((HashSet) entry.getKey()).toArray()[i]);
+                        if (i == ((HashSet) entry.getKey()).toArray().length - 1) {
+                            System.out.println("Agrega a values" + entry.getKey());
+                            values.addAll((HashSet) entry.getKey());
+                        }
+                        for (int j = 0; j < ((HashSet) entry.getValue()).toArray().length; j++) {
+                            if (claveCandidata.contains((String) ((HashSet) entry.getValue()).toArray()[j])) {
+                                claveCandidata.remove((String) ((HashSet) entry.getValue()).toArray()[j]);
+                                System.out.println("ELIMINA1");
+                            } else {
+                                values.addAll((HashSet) entry.getValue());
+                            }
+                        }
+                    } else {
+                        //Si values contiene la clave actual
+                        //Si values contiene todos los valores
+                        if (values.containsAll((HashSet) entry.getValue())) {
+                            //Si contiene todo el key
+                            if (values.containsAll((HashSet) entry.getKey())) {
+                                //Hay un ciclo
+                                //si no hay mas DF entonces volver a correr el algoritmo desde otro inicio
+                                //el algoritmo se debe dejar de correr hasta que vuelva a encontrar una clave que ya había encontrado
+                            } else {
+                                if (((HashSet) entry.getKey()).size() == 1) {
+                                    for (int j = 0; j < ((HashSet) entry.getValue()).toArray().length; j++) {
+                                        if (claveCandidata.contains((String) ((HashSet) entry.getValue()).toArray()[j])) {
+                                            claveCandidata.remove((String) ((HashSet) entry.getValue()).toArray()[j]);
+                                            System.out.println("ELIMINA2");
+                                        } else {
+                                            values.addAll((HashSet) entry.getValue());
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            System.out.println(values + "No contiene" + entry.getValue());
+                            for (int j = 0; j < ((HashSet) entry.getValue()).toArray().length; j++) {
+                                if (claveCandidata.contains((String) ((HashSet) entry.getValue()).toArray()[j])) {
+                                    claveCandidata.remove((String) ((HashSet) entry.getValue()).toArray()[j]);
+                                    System.out.println("ELIMINA3");
+                                } else {
+
+                                    values.addAll((HashSet) entry.getValue());
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            System.out.println("CONT=" + cont);
+            System.out.println("clavecandidata");
+            for (int i = 0; i < claveCandidata.size(); i++) {
+                System.out.print(claveCandidata.toArray()[i] + " ");
+            }
+            System.out.println("determina a");
+            for (int i = 0; i < values.size(); i++) {
+                System.out.print(values.toArray()[i] + " ");
+            }
+            System.out.println("\n\n");
+            cont++;
+        }
+        System.out.println("Resultado final");
+        for (int i = 0; i < claveCandidata.size(); i++) {
+            System.out.println(claveCandidata.toArray()[i]);
+        }*//*
+        HashSet<HashSet> claves = new HashSet();
+        claves = ClavesCandidatas(0, claves);
+        System.out.println("DESPUES DEL METODO");
+        for (int i = 0; i < claves.size(); i++) {
+            System.out.println(claves.toArray()[i]);
+        }*/
+    }//GEN-LAST:event_btnClavesMouseClicked
+
+    private void btnAgregarDFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarDFMouseClicked
+        // TODO add your handling code here:
+        if (lstDeterminantes.getModel().getSize() > 0 && lstDeterminantes.getModel().getSize() > 0) {
+
+            HashSet<String> determinante = new HashSet();
+            HashSet<String> determinado = new HashSet();
+            String p = "", h = "";
+            for (int i = 0; i < lstDeterminantes.getModel().getSize(); i++) {
+                for (int j = 0; j < atributos.size(); j++) {
+                    if (lstDeterminantes.getModel().getElementAt(i).equals(atributos.get(j))) {
+                        determinante.add(atributos.get(j));
+                    }
+                }
+            }
+            for (int i = 0; i < lstDeterminados.getModel().getSize(); i++) {
+                for (int j = 0; j < atributos.size(); j++) {
+                    if (lstDeterminados.getModel().getElementAt(i).equals(atributos.get(j))) {
+                        determinado.add(atributos.get(j));
+                    }
+                }
+            }
+            //Si la key ya existe entonces agregar "determinado" al valor de esa key
+            if (!determinante.equals(determinado)) {
+
+                if (m.containsKey(determinante)) {
+                    HashSet<String> temp = m.get(determinante);
+                    temp.addAll(determinado);
+                    m.put(determinante, temp);
+                } //Si la key no existe
+                else {
+                    m.put(determinante, determinado);
+                }
+            }
+            //Llenar el JList
+            DefaultListModel modelo = new DefaultListModel();
+            Set set = m.entrySet();
+            Iterator it = set.iterator();
+            while (it.hasNext()) {
+                Map.Entry entry = (Map.Entry) it.next();
+                modelo.addElement(entry.getKey() + "→" + entry.getValue());
+            }
+            lstDependencias.setModel(modelo);
+            lstDeterminantes.setModel(new DefaultListModel());
+            lstDeterminados.setModel(new DefaultListModel());
+
+        }
+    }//GEN-LAST:event_btnAgregarDFMouseClicked
+
+    private void txtAtributoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAtributoKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == 10) {
+            addAtributo();
+        }
+    }//GEN-LAST:event_txtAtributoKeyPressed
 
     private void btnAddAtributoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddAtributoMouseClicked
         // TODO add your handling code here
@@ -318,193 +554,6 @@ public class Principal extends javax.swing.JFrame {
         lstDeterminantes.setModel(modelo);
     }//GEN-LAST:event_btnClearDeterminantesMouseClicked
 
-    private void btnAgregarDFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarDFMouseClicked
-        // TODO add your handling code here:
-        if (lstDeterminantes.getModel().getSize() > 0 && lstDeterminantes.getModel().getSize() > 0) {
-
-            HashSet<String> determinante = new HashSet();
-            HashSet<String> determinado = new HashSet();
-            String p = "", h = "";
-            for (int i = 0; i < lstDeterminantes.getModel().getSize(); i++) {
-                for (int j = 0; j < atributos.size(); j++) {
-                    if (lstDeterminantes.getModel().getElementAt(i).equals(atributos.get(j))) {
-                        determinante.add(atributos.get(j));
-                    }
-                }
-            }
-            for (int i = 0; i < lstDeterminados.getModel().getSize(); i++) {
-                for (int j = 0; j < atributos.size(); j++) {
-                    if (lstDeterminados.getModel().getElementAt(i).equals(atributos.get(j))) {
-                        determinado.add(atributos.get(j));
-                    }
-                }
-            }
-            //Si la key ya existe entonces agregar "determinado" al valor de esa key
-            if (!determinante.equals(determinado)) {
-
-
-                if (m.containsKey(determinante)) {
-                    HashSet<String> temp = m.get(determinante);
-                    temp.addAll(determinado);
-                    m.put(determinante, temp);
-                } //Si la key no existe
-                else {
-                    m.put(determinante, determinado);
-                }
-            }
-            //Llenar el JList
-            DefaultListModel modelo = new DefaultListModel();
-            Set set = m.entrySet();
-            Iterator it = set.iterator();
-            while (it.hasNext()) {
-                Map.Entry entry = (Map.Entry) it.next();
-                modelo.addElement(entry.getKey() + "→" + entry.getValue());
-            }
-            lstDependencias.setModel(modelo);
-            lstDeterminantes.setModel(new DefaultListModel());
-            lstDeterminados.setModel(new DefaultListModel());
-
-        }
-    }//GEN-LAST:event_btnAgregarDFMouseClicked
-
-    private void btnGrafoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGrafoMouseClicked
-        // TODO add your handling code here:
-        /*Layout<vertice, String> layout = new FRLayout<vertice, String>(g);
-        
-         layout.setSize(
-         new Dimension(600, 480));
-         BasicVisualizationServer<vertice, String> vv = new BasicVisualizationServer<vertice, String>(layout);
-         Transformer<vertice, Paint> vertexPaint = new Transformer<vertice, Paint>() {
-         public Paint transform(vertice i) {
-         return i.color;
-         }
-         };
-         vv.getRenderContext().setEdgeDrawPaintTransformer(new ConstantTransformer(Color.white));
-         vv.getRenderContext().setEdgeStrokeTransformer(new ConstantTransformer(new BasicStroke(2.5f)));
-         vv.getRenderContext().setVertexFillPaintTransformer((Transformer<vertice, java.awt.Paint>) vertexPaint);
-         vv.setBackground(Color.GRAY);
-         vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller<vertice>());
-         vv.getRenderer().getVertexLabelRenderer().setPosition(Renderer.VertexLabel.Position.CNTR);
-         vv.setPreferredSize(new Dimension(600, 480)); //Sets the viewing area size
-         JFrame frame = new JFrame("Simple Graph View");
-         frame.getContentPane().add(vv);
-         frame.pack();
-        
-         frame.setVisible(true);*/
-        Set set = m.entrySet();
-        Iterator it = set.iterator();
-        while (it.hasNext()) {
-            Map.Entry entry = (Map.Entry) it.next();
-            System.out.println(entry.getKey() + " : " + entry.getValue());
-        }
-        /*while(m.elements().hasMoreElements()){
-         System.out.println(((vertice)m.elements().nextElement()).nombre);
-            
-         }*/
-
-    }//GEN-LAST:event_btnGrafoMouseClicked
-
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1MouseClicked
-
-    private void btnClavesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClavesMouseClicked
-        // TODO add your handling code here:
-        HashSet<String> claveCandidata = new HashSet();
-        HashSet<String> values = new HashSet();
-        //Agregarle a la superclave todas las keys
-        Set set = m.entrySet();
-        Iterator it = set.iterator();
-        int cont = 0;
-        while (it.hasNext()) {
-            Map.Entry entry = (Map.Entry) it.next();
-            //Si es el primer elemento
-            if (cont == 0) {
-                claveCandidata.addAll((HashSet) entry.getKey());
-                //Agregar la clave misma
-                values.addAll(claveCandidata);
-                //Agregar el valor actual
-                values.addAll((HashSet) entry.getValue());
-                System.out.println("");
-            } else {
-                //Si el determinante actual está contenido en values
-                //agregar a values los atributos que no estan contenidos
-                for (int i = 0; i < ((HashSet) entry.getKey()).toArray().length; i++) {
-                    if (!values.contains((String) ((HashSet) entry.getKey()).toArray()[i])) {
-                        claveCandidata.add((String) ((HashSet) entry.getKey()).toArray()[i]);
-                        values.addAll((HashSet) entry.getKey());
-                        for (int j = 0; j < ((HashSet) entry.getValue()).toArray().length; j++) {
-                            if (claveCandidata.contains((String) ((HashSet) entry.getValue()).toArray()[j])) {
-                                claveCandidata.remove((String) ((HashSet) entry.getValue()).toArray()[j]);
-                                System.out.println("ELIMINA");
-                            } else {
-                                values.addAll((HashSet) entry.getValue());
-                            }
-                        }
-                    } else {
-                        //Si values contiene la clave actual
-                        //Si values contiene toda la clave
-                        if (values.containsAll((HashSet) entry.getValue())) {
-                            System.out.println("111111111");
-                            if (((HashSet) entry.getKey()).size() == 1) {
-                                System.out.println("2222222");
-                                for (int j = 0; j < ((HashSet) entry.getValue()).toArray().length; j++) {
-                                    if (claveCandidata.contains((String) ((HashSet) entry.getValue()).toArray()[j])) {
-                                        claveCandidata.remove((String) ((HashSet) entry.getValue()).toArray()[j]);
-                                        System.out.println("ELIMINA");
-                                    } else {
-                                        values.addAll((HashSet) entry.getValue());
-                                    }
-                                }
-                            }
-                            //Hay un ciclo
-                            //si no hay mas DF entonces volver a correr el algoritmo desde otro inicio
-                            //el algoritmo se debe dejar de correr hasta que vuelva a encontrar una clave que ya había encontrado
-                        } else {
-                            for (int j = 0; j < ((HashSet) entry.getValue()).toArray().length; j++) {
-                                if (claveCandidata.contains((String) ((HashSet) entry.getValue()).toArray()[j])) {
-                                    claveCandidata.remove((String) ((HashSet) entry.getValue()).toArray()[j]);
-                                    System.out.println("ELIMINA");
-                                } else {
-
-                                    values.addAll((HashSet) entry.getValue());
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            System.out.println("CONT=" + cont);
-            System.out.println("clavecandidata");
-            for (int i = 0; i < claveCandidata.size(); i++) {
-                System.out.print(claveCandidata.toArray()[i] + " ");
-            }
-            System.out.println("determina a");
-            for (int i = 0; i < values.size(); i++) {
-                System.out.print(values.toArray()[i] + " ");
-            }
-            System.out.println("\n\n");
-            cont++;
-        }
-        System.out.println("Resultado final");
-        for (int i = 0; i < claveCandidata.size(); i++) {
-            System.out.println(claveCandidata.toArray()[i]);
-        }/*
-         HashSet<HashSet> claves = new HashSet();
-         claves = ClavesCandidatas(0, claves);
-         System.out.println("DESPUES DEL METODO");
-         for (int i = 0; i < claves.size(); i++) {
-         System.out.println(claves.toArray()[i]);
-         }*/
-    }//GEN-LAST:event_btnClavesMouseClicked
-
-    private void txtAtributoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAtributoKeyPressed
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == 10) {
-            addAtributo();
-        }
-    }//GEN-LAST:event_txtAtributoKeyPressed
-
     private void actualizarComboBox() {
         DefaultListModel mod = new DefaultListModel();
         DefaultComboBoxModel modelo = new DefaultComboBoxModel();
@@ -540,7 +589,108 @@ public class Principal extends javax.swing.JFrame {
         }
     }
 
-    
+    private void claves() {
+        HashSet<HashSet> ccs = new HashSet();
+        HashSet<String> claveCandidata = new HashSet();
+        HashSet<String> values = new HashSet();
+        //Agregarle a la superclave todas las keys
+        Set set = m.entrySet();
+        Iterator it = set.iterator();
+        int cont = 0;
+        boolean segunda = false;
+        while (it.hasNext()) {
+            Map.Entry entry = (Map.Entry) it.next();
+            //Si es el primer elemento
+            if (cont == 0) {
+                claveCandidata.addAll((HashSet) entry.getKey());
+                //Agregar la clave misma
+                values.addAll(claveCandidata);
+                //Agregar el valor actual
+                values.addAll((HashSet) entry.getValue());
+            } else {
+                if (claveCandidata.containsAll((HashSet) entry.getKey())) {
+                    if (values.containsAll((HashSet) entry.getValue())) {
+                        for (int i = 0; i < claveCandidata.toArray().length; i++) {
+                            if (((HashSet) entry.getValue()).contains(claveCandidata.toArray()[i])) {
+                                //Ciclo
+                                System.out.println("Hay ciclo caso 1");
+                                continue;
+                            }
+                        }
+                    } else {
+                        for (int i = 0; i < ((HashSet) entry.getValue()).toArray().length; i++) {
+                            if (!values.contains((String) ((HashSet) entry.getValue()).toArray()[i])) {
+                                values.add((String) ((HashSet) entry.getValue()).toArray()[i]);
+                            }
+                        }
+                    }
+                } else {
+                    if (values.containsAll((HashSet) entry.getKey())) {
+                        if (((HashSet) entry.getValue()).containsAll(claveCandidata)) {
+                            System.out.println("----------------");
+                            System.out.println("Ciclo en " + claveCandidata + " -x- " + entry.getKey());
+                            System.out.println("Values: " + values);
+                            System.out.println("entry.getValue(): " + entry.getValue() + "--------------------\n");
+                            HashSet<String> temp = new HashSet();
+                            temp.addAll(claveCandidata);
+                            temp.removeAll((HashSet) entry.getValue());
+                            temp.addAll((HashSet) entry.getKey());
+                            ccs.add(temp);
+                            if (!it.hasNext()) {
+                                if (!segunda) {
+                                    it = set.iterator();
+                                    System.out.println("***/*/*/*/*");
+                                    segunda = true;
+                                }
+                            }
+                            continue;
+                        } else {
+                            for (int i = 0; i < claveCandidata.size(); i++) {
+                                if (((HashSet) entry.getValue()).contains(claveCandidata.toArray()[i])) {
+                                    System.out.println("Caso 1: Se elimina " + claveCandidata.toArray()[i]);
+                                    claveCandidata.remove((String) claveCandidata.toArray()[i]);
+                                }
+                            }
+                            values.addAll((HashSet) entry.getValue());
+                        }
+
+
+                    } else {
+                        for (int i = 0; i < ((HashSet) entry.getKey()).toArray().length; i++) {
+                            if (!values.contains((String) ((HashSet) entry.getKey()).toArray()[i])) {
+                                claveCandidata.add((String) ((HashSet) entry.getKey()).toArray()[i]);
+                                values.add((String) ((HashSet) entry.getKey()).toArray()[i]);
+                            }
+                        }
+                        values.addAll((HashSet) entry.getValue());
+                    }
+                }
+                for (int i = 0; i < claveCandidata.toArray().length; i++) {
+                    if (((HashSet) entry.getValue()).contains(claveCandidata.toArray()[i])) {
+                        System.out.println("Caso 2: Se elimina " + claveCandidata.toArray()[i]);
+                        claveCandidata.remove((String) claveCandidata.toArray()[i]);
+                    }
+                }
+            }
+            System.out.println("Actualmente " + claveCandidata + " determina a " + values);
+            cont++;
+            if (!it.hasNext()) {
+                if (!segunda) {
+                    it = set.iterator();
+                    System.out.println("***/*/*/*/*");
+                    segunda = true;
+                }
+            }
+            System.out.println("segunda" + segunda);
+        }
+        System.out.println("Clave Candidata es " + claveCandidata + " determina a " + values);
+        ccs.add(claveCandidata);
+        txtPK.setText(claveCandidata.toString());
+        System.out.println("Claves Candidatas:");
+        for (int i = 0; i < ccs.size(); i++) {
+            System.out.println(ccs.toArray()[i]);
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -583,25 +733,40 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregarDF;
     private javax.swing.JButton btnClaves;
     private javax.swing.JButton btnClearDeterminantes;
-    private javax.swing.JButton btnGrafo;
     private javax.swing.JButton btnLimpiarDeterminados;
+    private javax.swing.JButton btnNormalizar;
     private javax.swing.JComboBox cmbDeterminados;
     private javax.swing.JComboBox cmbDeterminantes;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JList lstAtributos;
     private javax.swing.JList lstDependencias;
     private javax.swing.JList lstDeterminados;
     private javax.swing.JList lstDeterminantes;
     private javax.swing.JTextField txtAtributo;
+    private javax.swing.JTextField txtEsquema;
+    private javax.swing.JTextField txtNombreAtributo;
+    private javax.swing.JTextField txtNombreEsquema;
     private javax.swing.JTextField txtPK;
     // End of variables declaration//GEN-END:variables
     ArrayList<String> atributos = new ArrayList();
