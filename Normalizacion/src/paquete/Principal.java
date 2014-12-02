@@ -4,6 +4,7 @@
  */
 package paquete;
 
+import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -27,6 +28,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        jTabbedPane1.setLayout(new BorderLayout());
     }
 
     /**
@@ -38,6 +40,7 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane10 = new javax.swing.JScrollPane();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         btnClearDeterminantes = new javax.swing.JButton();
@@ -59,7 +62,7 @@ public class Principal extends javax.swing.JFrame {
         btnAgregarDF = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         lstDependencias = new javax.swing.JList();
-        txtPK = new javax.swing.JTextField();
+        txtClave = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         btnClaves = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -70,18 +73,35 @@ public class Principal extends javax.swing.JFrame {
         txtNombreAtributo = new javax.swing.JTextField();
         txtEsquema = new javax.swing.JTextField();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        lstEsquemas = new javax.swing.JList();
         jLabel6 = new javax.swing.JLabel();
         btnNormalizar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtPK = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jEditorPane1 = new javax.swing.JEditorPane();
         jLabel9 = new javax.swing.JLabel();
+        btnAddAtr = new javax.swing.JButton();
+        cmbAtr = new javax.swing.JComboBox();
+        jButton1 = new javax.swing.JButton();
+        cmbDeterminanteEsquema = new javax.swing.JComboBox();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        lstDeterminanteEsquema = new javax.swing.JList();
+        jLabel10 = new javax.swing.JLabel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        lstDeterminadoEsquema = new javax.swing.JList();
+        cmbDeterminadoEsquema = new javax.swing.JComboBox();
+        btnAddDeterminanteEsquema = new javax.swing.JButton();
+        btnAddDeterminadoEsquema = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        lstDF = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(21, 217));
+
+        jTabbedPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         btnClearDeterminantes.setText("Limpiar");
         btnClearDeterminantes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -143,7 +163,7 @@ public class Principal extends javax.swing.JFrame {
 
         jScrollPane4.setViewportView(lstDependencias);
 
-        txtPK.setEnabled(false);
+        txtClave.setEnabled(false);
 
         jLabel3.setText("Clave Primaria");
 
@@ -194,9 +214,9 @@ public class Principal extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtPK))
+                                .addComponent(txtClave))
                             .addComponent(btnClaves))))
-                .addContainerGap(228, Short.MAX_VALUE))
+                .addContainerGap(523, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,7 +258,7 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(63, 63, 63)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -250,12 +270,23 @@ public class Principal extends javax.swing.JFrame {
         jLabel4.setText("Nombre del esquema relacional");
 
         jButton2.setText("Agregar Esquema");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
 
         jLabel5.setText("Atributo");
 
+        txtNombreAtributo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreAtributoKeyPressed(evt);
+            }
+        });
+
         txtEsquema.setEnabled(false);
 
-        jScrollPane5.setViewportView(jList1);
+        jScrollPane5.setViewportView(lstEsquemas);
 
         jLabel6.setText("Esquemas relacionales sin normalizar");
 
@@ -269,80 +300,198 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel9.setText("Esquemas relacionales normalizados");
 
+        btnAddAtr.setText("Agregar Atributo");
+        btnAddAtr.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAddAtrMouseClicked(evt);
+            }
+        });
+
+        jButton1.setText("Agrega a clave primaria");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+
+        jScrollPane7.setViewportView(lstDeterminanteEsquema);
+
+        jLabel10.setText("Determina a ");
+
+        jScrollPane8.setViewportView(lstDeterminadoEsquema);
+
+        btnAddDeterminanteEsquema.setText("Agregar");
+        btnAddDeterminanteEsquema.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAddDeterminanteEsquemaMouseClicked(evt);
+            }
+        });
+
+        btnAddDeterminadoEsquema.setText("Agregar");
+        btnAddDeterminadoEsquema.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAddDeterminadoEsquemaMouseClicked(evt);
+            }
+        });
+
+        jButton3.setText("Agregar DF");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
+
+        jScrollPane9.setViewportView(lstDF);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel9))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGap(94, 94, 94)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel8)
+                                .addComponent(jLabel7)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jLabel9)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtNombreAtributo, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                                    .addComponent(txtNombreEsquema))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnAddAtr))
+                            .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(cmbAtr, javax.swing.GroupLayout.Alignment.LEADING, 0, 151, Short.MAX_VALUE)
+                                    .addComponent(txtEsquema, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton1)
+                                    .addComponent(jButton2))))
+                        .addGap(44, 44, 44)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
-                            .addComponent(btnNormalizar)))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtNombreAtributo, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
-                        .addComponent(txtNombreEsquema)
-                        .addComponent(jTextField1))
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(113, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnAddDeterminanteEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmbDeterminanteEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(cmbDeterminadoEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel10)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnAddDeterminadoEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmbDeterminadoEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(84, 84, 84))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(75, 75, 75)
+                                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(116, 116, 116)
+                                        .addComponent(jButton3))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(118, 118, 118)
+                                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnNormalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(298, 298, 298))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtNombreEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtNombreAtributo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNombreEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbDeterminanteEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbDeterminadoEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel7)))
+                        .addComponent(jLabel5)
+                        .addComponent(txtNombreAtributo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAddAtr))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel10)
+                        .addComponent(btnAddDeterminanteEsquema)
+                        .addComponent(btnAddDeterminadoEsquema)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNormalizar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addContainerGap(134, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel8)
+                                    .addComponent(cmbAtr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtPK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jButton2)
+                                    .addComponent(txtEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6)
+                                    .addComponent(btnNormalizar))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel9)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(157, Short.MAX_VALUE))))
         );
 
         jTabbedPane1.addTab("Parte 2", jPanel2);
+
+        jScrollPane10.setViewportView(jTabbedPane1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane10)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
         );
 
         pack();
@@ -352,98 +501,98 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         claves();
         /*HashSet<String> claveCandidata = new HashSet();
-        HashSet<String> values = new HashSet();
-        //Agregarle a la superclave todas las keys
-        Set set = m.entrySet();
-        Iterator it = set.iterator();
-        int cont = 0;
-        while (it.hasNext()) {
-            Map.Entry entry = (Map.Entry) it.next();
-            //Si es el primer elemento
-            if (cont == 0) {
-                claveCandidata.addAll((HashSet) entry.getKey());
-                //Agregar la clave misma
-                values.addAll(claveCandidata);
-                //Agregar el valor actual
-                values.addAll((HashSet) entry.getValue());
-                System.out.println("");
-            } else {
-                //Si el determinante actual está contenido en values
-                //agregar a values los atributos que no estan contenidos
-                for (int i = 0; i < ((HashSet) entry.getKey()).toArray().length; i++) {
-                    if (!values.contains((String) ((HashSet) entry.getKey()).toArray()[i])) {
-                        System.out.println("1. " + values + "No contiene" + ((HashSet) entry.getKey()).toArray()[i]);
-                        claveCandidata.add((String) ((HashSet) entry.getKey()).toArray()[i]);
-                        if (i == ((HashSet) entry.getKey()).toArray().length - 1) {
-                            System.out.println("Agrega a values" + entry.getKey());
-                            values.addAll((HashSet) entry.getKey());
-                        }
-                        for (int j = 0; j < ((HashSet) entry.getValue()).toArray().length; j++) {
-                            if (claveCandidata.contains((String) ((HashSet) entry.getValue()).toArray()[j])) {
-                                claveCandidata.remove((String) ((HashSet) entry.getValue()).toArray()[j]);
-                                System.out.println("ELIMINA1");
-                            } else {
-                                values.addAll((HashSet) entry.getValue());
-                            }
-                        }
-                    } else {
-                        //Si values contiene la clave actual
-                        //Si values contiene todos los valores
-                        if (values.containsAll((HashSet) entry.getValue())) {
-                            //Si contiene todo el key
-                            if (values.containsAll((HashSet) entry.getKey())) {
-                                //Hay un ciclo
-                                //si no hay mas DF entonces volver a correr el algoritmo desde otro inicio
-                                //el algoritmo se debe dejar de correr hasta que vuelva a encontrar una clave que ya había encontrado
-                            } else {
-                                if (((HashSet) entry.getKey()).size() == 1) {
-                                    for (int j = 0; j < ((HashSet) entry.getValue()).toArray().length; j++) {
-                                        if (claveCandidata.contains((String) ((HashSet) entry.getValue()).toArray()[j])) {
-                                            claveCandidata.remove((String) ((HashSet) entry.getValue()).toArray()[j]);
-                                            System.out.println("ELIMINA2");
-                                        } else {
-                                            values.addAll((HashSet) entry.getValue());
-                                        }
-                                    }
-                                }
-                            }
-                        } else {
-                            System.out.println(values + "No contiene" + entry.getValue());
-                            for (int j = 0; j < ((HashSet) entry.getValue()).toArray().length; j++) {
-                                if (claveCandidata.contains((String) ((HashSet) entry.getValue()).toArray()[j])) {
-                                    claveCandidata.remove((String) ((HashSet) entry.getValue()).toArray()[j]);
-                                    System.out.println("ELIMINA3");
-                                } else {
+         HashSet<String> values = new HashSet();
+         //Agregarle a la superclave todas las keys
+         Set set = m.entrySet();
+         Iterator it = set.iterator();
+         int cont = 0;
+         while (it.hasNext()) {
+         Map.Entry entry = (Map.Entry) it.next();
+         //Si es el primer elemento
+         if (cont == 0) {
+         claveCandidata.addAll((HashSet) entry.getKey());
+         //Agregar la clave misma
+         values.addAll(claveCandidata);
+         //Agregar el valor actual
+         values.addAll((HashSet) entry.getValue());
+         System.out.println("");
+         } else {
+         //Si el determinante actual está contenido en values
+         //agregar a values los atributos que no estan contenidos
+         for (int i = 0; i < ((HashSet) entry.getKey()).toArray().length; i++) {
+         if (!values.contains((String) ((HashSet) entry.getKey()).toArray()[i])) {
+         System.out.println("1. " + values + "No contiene" + ((HashSet) entry.getKey()).toArray()[i]);
+         claveCandidata.add((String) ((HashSet) entry.getKey()).toArray()[i]);
+         if (i == ((HashSet) entry.getKey()).toArray().length - 1) {
+         System.out.println("Agrega a values" + entry.getKey());
+         values.addAll((HashSet) entry.getKey());
+         }
+         for (int j = 0; j < ((HashSet) entry.getValue()).toArray().length; j++) {
+         if (claveCandidata.contains((String) ((HashSet) entry.getValue()).toArray()[j])) {
+         claveCandidata.remove((String) ((HashSet) entry.getValue()).toArray()[j]);
+         System.out.println("ELIMINA1");
+         } else {
+         values.addAll((HashSet) entry.getValue());
+         }
+         }
+         } else {
+         //Si values contiene la clave actual
+         //Si values contiene todos los valores
+         if (values.containsAll((HashSet) entry.getValue())) {
+         //Si contiene todo el key
+         if (values.containsAll((HashSet) entry.getKey())) {
+         //Hay un ciclo
+         //si no hay mas DF entonces volver a correr el algoritmo desde otro inicio
+         //el algoritmo se debe dejar de correr hasta que vuelva a encontrar una clave que ya había encontrado
+         } else {
+         if (((HashSet) entry.getKey()).size() == 1) {
+         for (int j = 0; j < ((HashSet) entry.getValue()).toArray().length; j++) {
+         if (claveCandidata.contains((String) ((HashSet) entry.getValue()).toArray()[j])) {
+         claveCandidata.remove((String) ((HashSet) entry.getValue()).toArray()[j]);
+         System.out.println("ELIMINA2");
+         } else {
+         values.addAll((HashSet) entry.getValue());
+         }
+         }
+         }
+         }
+         } else {
+         System.out.println(values + "No contiene" + entry.getValue());
+         for (int j = 0; j < ((HashSet) entry.getValue()).toArray().length; j++) {
+         if (claveCandidata.contains((String) ((HashSet) entry.getValue()).toArray()[j])) {
+         claveCandidata.remove((String) ((HashSet) entry.getValue()).toArray()[j]);
+         System.out.println("ELIMINA3");
+         } else {
 
-                                    values.addAll((HashSet) entry.getValue());
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            System.out.println("CONT=" + cont);
-            System.out.println("clavecandidata");
-            for (int i = 0; i < claveCandidata.size(); i++) {
-                System.out.print(claveCandidata.toArray()[i] + " ");
-            }
-            System.out.println("determina a");
-            for (int i = 0; i < values.size(); i++) {
-                System.out.print(values.toArray()[i] + " ");
-            }
-            System.out.println("\n\n");
-            cont++;
-        }
-        System.out.println("Resultado final");
-        for (int i = 0; i < claveCandidata.size(); i++) {
-            System.out.println(claveCandidata.toArray()[i]);
-        }*//*
-        HashSet<HashSet> claves = new HashSet();
-        claves = ClavesCandidatas(0, claves);
-        System.out.println("DESPUES DEL METODO");
-        for (int i = 0; i < claves.size(); i++) {
-            System.out.println(claves.toArray()[i]);
-        }*/
+         values.addAll((HashSet) entry.getValue());
+         }
+         }
+         }
+         }
+         }
+         }
+         System.out.println("CONT=" + cont);
+         System.out.println("clavecandidata");
+         for (int i = 0; i < claveCandidata.size(); i++) {
+         System.out.print(claveCandidata.toArray()[i] + " ");
+         }
+         System.out.println("determina a");
+         for (int i = 0; i < values.size(); i++) {
+         System.out.print(values.toArray()[i] + " ");
+         }
+         System.out.println("\n\n");
+         cont++;
+         }
+         System.out.println("Resultado final");
+         for (int i = 0; i < claveCandidata.size(); i++) {
+         System.out.println(claveCandidata.toArray()[i]);
+         }*//*
+         HashSet<HashSet> claves = new HashSet();
+         claves = ClavesCandidatas(0, claves);
+         System.out.println("DESPUES DEL METODO");
+         for (int i = 0; i < claves.size(); i++) {
+         System.out.println(claves.toArray()[i]);
+         }*/
     }//GEN-LAST:event_btnClavesMouseClicked
 
     private void btnAgregarDFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarDFMouseClicked
@@ -554,6 +703,122 @@ public class Principal extends javax.swing.JFrame {
         lstDeterminantes.setModel(modelo);
     }//GEN-LAST:event_btnClearDeterminantesMouseClicked
 
+    private void txtNombreAtributoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreAtributoKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == 10) {
+            addAtributoEsquema();
+        }
+    }//GEN-LAST:event_txtNombreAtributoKeyPressed
+
+    private void btnAddAtrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddAtrMouseClicked
+        // TODO add your handling code here:
+        addAtributoEsquema();
+    }//GEN-LAST:event_btnAddAtrMouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        pkActual.add(cmbAtr.getSelectedItem().toString());
+        txtPK.setText(pkActual.toString());
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+        Hashtable<HashSet, HashSet> tabla = new Hashtable();
+        atributosEsquema.removeAll(pkActual);
+        //tabla.put(pkActual, atributosEsquema);
+        esquemas.add(new Esquema(pkActual, atributosEsquema, DFactual, "", txtNombreEsquema.getText()));
+        DefaultListModel modelo = new DefaultListModel();
+        for (int i = 0; i < lstEsquemas.getModel().getSize(); i++) {
+            modelo.addElement(lstEsquemas.getModel().getElementAt(i));
+        }
+        modelo.addElement(new Esquema(pkActual, atributosEsquema, DFactual, "", txtNombreEsquema.getText()));
+        lstEsquemas.setModel(modelo);
+        atributosEsquema = new HashSet();
+        pkActual = new HashSet();
+        txtPK.setText("");
+        txtEsquema.setText("");
+        txtNombreEsquema.setText("");
+        cmbAtr.setModel(new DefaultComboBoxModel());
+        cmbDeterminanteEsquema.setModel(new DefaultComboBoxModel());
+        cmbDeterminadoEsquema.setModel(new DefaultComboBoxModel());
+        lstDeterminanteEsquema.setModel(new DefaultListModel());
+        lstDeterminadoEsquema.setModel(new DefaultListModel());
+        lstDF.setModel(new DefaultListModel());
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void btnAddDeterminanteEsquemaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddDeterminanteEsquemaMouseClicked
+        // TODO add your handling code here:
+        if (cmbDeterminanteEsquema.getModel().getSize() > 0) {
+            boolean existe = false;
+            DefaultListModel modelo = new DefaultListModel();
+            for (int i = 0; i < lstDeterminanteEsquema.getModel().getSize(); i++) {
+                if (lstDeterminanteEsquema.getModel().getElementAt(i).equals(cmbDeterminanteEsquema.getSelectedItem())) {
+                    existe = true;
+                }
+                modelo.addElement(lstDeterminanteEsquema.getModel().getElementAt(i));
+            }
+            if (!existe) {
+                ((DefaultListModel) modelo).addElement(cmbDeterminanteEsquema.getSelectedItem());
+                lstDeterminanteEsquema.setModel(modelo);
+            }
+        }
+    }//GEN-LAST:event_btnAddDeterminanteEsquemaMouseClicked
+
+    private void btnAddDeterminadoEsquemaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddDeterminadoEsquemaMouseClicked
+        // TODO add your handling code here:
+        if (cmbDeterminadoEsquema.getModel().getSize() > 0) {
+            boolean existe = false;
+            DefaultListModel modelo = new DefaultListModel();
+            for (int i = 0; i < lstDeterminadoEsquema.getModel().getSize(); i++) {
+                if (lstDeterminadoEsquema.getModel().getElementAt(i).equals(cmbDeterminadoEsquema.getSelectedItem())) {
+                    existe = true;
+                }
+                modelo.addElement(lstDeterminadoEsquema.getModel().getElementAt(i));
+            }
+            if (!existe) {
+                ((DefaultListModel) modelo).addElement(cmbDeterminadoEsquema.getSelectedItem());
+                lstDeterminadoEsquema.setModel(modelo);
+            }
+        }
+    }//GEN-LAST:event_btnAddDeterminadoEsquemaMouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        if (lstDeterminanteEsquema.getModel().getSize() > 0 && lstDeterminanteEsquema.getModel().getSize() > 0) {
+            HashSet<String> determinante = new HashSet();
+            HashSet<String> determinado = new HashSet();
+            String p = "", h = "";
+            for (int i = 0; i < lstDeterminanteEsquema.getModel().getSize(); i++) {
+                determinante.add(lstDeterminanteEsquema.getModel().getElementAt(i).toString());
+            }
+            for (int i = 0; i < lstDeterminadoEsquema.getModel().getSize(); i++) {
+                determinado.add(lstDeterminadoEsquema.getModel().getElementAt(i).toString());
+            }
+            //Si la key ya existe entonces agregar "determinado" al valor de esa key
+            if (!determinante.equals(determinado)) {
+
+                if (DFactual.containsKey(determinante)) {
+                    HashSet<String> temp = DFactual.get(determinante);
+                    temp.addAll(determinado);
+                    DFactual.put(determinante, temp);
+                } //Si la key no existe
+                else {
+                    DFactual.put(determinante, determinado);
+                }
+            }
+            //Llenar el JList
+            DefaultListModel modelo = new DefaultListModel();
+            Set set = DFactual.entrySet();
+            Iterator it = set.iterator();
+            while (it.hasNext()) {
+                Map.Entry entry = (Map.Entry) it.next();
+                modelo.addElement(entry.getKey() + "→" + entry.getValue());
+            }
+            lstDF.setModel(modelo);
+            lstDeterminanteEsquema.setModel(new DefaultListModel());
+            lstDeterminadoEsquema.setModel(new DefaultListModel());
+        }
+    }//GEN-LAST:event_jButton3MouseClicked
+
     private void actualizarComboBox() {
         DefaultListModel mod = new DefaultListModel();
         DefaultComboBoxModel modelo = new DefaultComboBoxModel();
@@ -585,6 +850,46 @@ public class Principal extends javax.swing.JFrame {
                 atributos.add(nombre);
                 actualizarComboBox();
                 txtAtributo.setText("");
+            }
+        }
+    }
+
+    private void addAtributoEsquema() {
+        boolean found = false;
+        for (int i = 0; i < atributosEsquema.size(); i++) {
+            if (atributosEsquema.toArray()[i].equals(txtNombreAtributo.getText())) {
+                found = true;
+            }
+        }
+        if (found) {
+            txtNombreAtributo.setText("");
+        } else {
+            if (!txtNombreAtributo.getText().replaceAll(" ", "").isEmpty()) {
+                atributosEsquema.add(txtNombreAtributo.getText());
+                DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+                DefaultComboBoxModel modelo2 = new DefaultComboBoxModel();
+                DefaultComboBoxModel modelo3 = new DefaultComboBoxModel();
+                for (int i = 0; i < atributosEsquema.size(); i++) {
+                    modelo.addElement((String) atributosEsquema.toArray()[i]);
+                    modelo2.addElement((String) atributosEsquema.toArray()[i]);
+                    modelo3.addElement((String) atributosEsquema.toArray()[i]);
+                }
+                cmbAtr.setModel(modelo);
+                cmbDeterminanteEsquema.setModel(modelo2);
+                cmbDeterminadoEsquema.setModel(modelo3);
+                if (txtEsquema.getText().isEmpty()) {
+                    if (txtNombreEsquema.getText().isEmpty()) {
+                        txtEsquema.setText("{" + txtNombreAtributo.getText() + "}");
+                    } else {
+                        txtEsquema.setText(txtNombreEsquema.getText() + "{" + txtNombreAtributo.getText() + "}");
+                    }
+
+                } else {
+                    String[] valores = txtEsquema.getText().split("[{]");
+                    valores = valores[1].split("}");
+                    txtEsquema.setText(txtNombreEsquema.getText() + "{" + valores[0] + "," + txtNombreAtributo.getText() + "}");
+                }
+                txtNombreAtributo.setText("");
             }
         }
     }
@@ -685,7 +990,7 @@ public class Principal extends javax.swing.JFrame {
         }
         System.out.println("Clave Candidata es " + claveCandidata + " determina a " + values);
         ccs.add(claveCandidata);
-        txtPK.setText(claveCandidata.toString());
+        txtClave.setText(claveCandidata.toString());
         System.out.println("Claves Candidatas:");
         for (int i = 0; i < ccs.size(); i++) {
             System.out.println(ccs.toArray()[i]);
@@ -727,19 +1032,28 @@ public class Principal extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddAtr;
     private javax.swing.JButton btnAddAtributo;
     private javax.swing.JButton btnAddDeterminado;
+    private javax.swing.JButton btnAddDeterminadoEsquema;
     private javax.swing.JButton btnAddDeterminante;
+    private javax.swing.JButton btnAddDeterminanteEsquema;
     private javax.swing.JButton btnAgregarDF;
     private javax.swing.JButton btnClaves;
     private javax.swing.JButton btnClearDeterminantes;
     private javax.swing.JButton btnLimpiarDeterminados;
     private javax.swing.JButton btnNormalizar;
+    private javax.swing.JComboBox cmbAtr;
+    private javax.swing.JComboBox cmbDeterminadoEsquema;
     private javax.swing.JComboBox cmbDeterminados;
+    private javax.swing.JComboBox cmbDeterminanteEsquema;
     private javax.swing.JComboBox cmbDeterminantes;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -748,22 +1062,29 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JList lstAtributos;
+    private javax.swing.JList lstDF;
     private javax.swing.JList lstDependencias;
+    private javax.swing.JList lstDeterminadoEsquema;
     private javax.swing.JList lstDeterminados;
+    private javax.swing.JList lstDeterminanteEsquema;
     private javax.swing.JList lstDeterminantes;
+    private javax.swing.JList lstEsquemas;
     private javax.swing.JTextField txtAtributo;
+    private javax.swing.JTextField txtClave;
     private javax.swing.JTextField txtEsquema;
     private javax.swing.JTextField txtNombreAtributo;
     private javax.swing.JTextField txtNombreEsquema;
@@ -771,5 +1092,8 @@ public class Principal extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     ArrayList<String> atributos = new ArrayList();
     Hashtable<HashSet, HashSet> m = new Hashtable<>();
-    //HashSet<HashSet> claves = new HashSet();
+    HashSet<String> atributosEsquema = new HashSet();
+    HashSet<String> pkActual = new HashSet();
+    HashSet<Esquema> esquemas = new HashSet();
+    Hashtable<HashSet, HashSet> DFactual = new Hashtable();
 }
