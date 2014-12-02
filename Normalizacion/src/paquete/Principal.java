@@ -399,8 +399,6 @@ public class Principal extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(btnAddDeterminadoEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmbDeterminadoEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(84, 84, 84))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -427,11 +425,12 @@ public class Principal extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNombreEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbDeterminanteEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbDeterminadoEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtNombreEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbDeterminanteEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbDeterminadoEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -723,27 +722,35 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
-        Hashtable<HashSet, HashSet> tabla = new Hashtable();
-        atributosEsquema.removeAll(pkActual);
-        //tabla.put(pkActual, atributosEsquema);
-        esquemas.add(new Esquema(pkActual, atributosEsquema, DFactual, "", txtNombreEsquema.getText()));
-        DefaultListModel modelo = new DefaultListModel();
-        for (int i = 0; i < lstEsquemas.getModel().getSize(); i++) {
-            modelo.addElement(lstEsquemas.getModel().getElementAt(i));
+        if (!(DFactual.isEmpty() || txtEsquema.getText().isEmpty()||txtPK.getText().isEmpty())) {
+            Hashtable<HashSet, HashSet> tabla = new Hashtable();
+            atributosEsquema.removeAll(pkActual);
+            //tabla.put(pkActual, atributosEsquema);
+            esquemas.add(new Esquema(pkActual, atributosEsquema, DFactual, "", txtNombreEsquema.getText()));
+            DefaultListModel modelo = new DefaultListModel();
+            for (int i = 0; i < lstEsquemas.getModel().getSize(); i++) {
+                modelo.addElement(lstEsquemas.getModel().getElementAt(i));
+            }
+            modelo.addElement(new Esquema(pkActual, atributosEsquema, DFactual, "", txtNombreEsquema.getText()));
+            lstEsquemas.setModel(modelo);
+            atributosEsquema = new HashSet();
+            pkActual = new HashSet();
+            txtPK.setText("");
+            txtEsquema.setText("");
+            txtNombreEsquema.setText("");
+            cmbAtr.setModel(new DefaultComboBoxModel());
+            cmbDeterminanteEsquema.setModel(new DefaultComboBoxModel());
+            cmbDeterminadoEsquema.setModel(new DefaultComboBoxModel());
+            lstDeterminanteEsquema.setModel(new DefaultListModel());
+            lstDeterminadoEsquema.setModel(new DefaultListModel());
+            lstDF.setModel(new DefaultListModel());
+        }else if(DFactual.isEmpty()){
+            JOptionPane.showMessageDialog(null,"No ha agregado dependencias funcionales" , "Aviso", 2);
+        }else if(txtEsquema.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"El esquema Relacional no tiene atributos" , "Aviso", 2);
+        }else if(txtPK.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"No ha agregado una clave primaria" , "Aviso", 2);
         }
-        modelo.addElement(new Esquema(pkActual, atributosEsquema, DFactual, "", txtNombreEsquema.getText()));
-        lstEsquemas.setModel(modelo);
-        atributosEsquema = new HashSet();
-        pkActual = new HashSet();
-        txtPK.setText("");
-        txtEsquema.setText("");
-        txtNombreEsquema.setText("");
-        cmbAtr.setModel(new DefaultComboBoxModel());
-        cmbDeterminanteEsquema.setModel(new DefaultComboBoxModel());
-        cmbDeterminadoEsquema.setModel(new DefaultComboBoxModel());
-        lstDeterminanteEsquema.setModel(new DefaultListModel());
-        lstDeterminadoEsquema.setModel(new DefaultListModel());
-        lstDF.setModel(new DefaultListModel());
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void btnAddDeterminanteEsquemaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddDeterminanteEsquemaMouseClicked
