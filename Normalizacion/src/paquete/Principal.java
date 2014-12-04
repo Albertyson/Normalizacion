@@ -291,6 +291,11 @@ public class Principal extends javax.swing.JFrame {
         jLabel6.setText("Esquemas relacionales sin normalizar");
 
         btnNormalizar.setText("Normalizar");
+        btnNormalizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNormalizarMouseClicked(evt);
+            }
+        });
 
         jLabel7.setText("Esquema relacional");
 
@@ -390,36 +395,29 @@ public class Principal extends javax.swing.JFrame {
                                     .addComponent(btnAddDeterminanteEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cmbDeterminanteEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(cmbDeterminadoEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnAddDeterminadoEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE)))
-                                .addGap(84, 84, 84))
+                                    .addComponent(btnAddDeterminadoEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmbDeterminadoEsquema, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(75, 75, 75)
                                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(116, 116, 116)
-                                        .addComponent(jButton3))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(118, 118, 118)
-                                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnNormalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(298, 298, 298))))
+                                .addGap(116, 116, 116)
+                                .addComponent(jButton3))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(118, 118, 118)
+                                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnNormalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -722,7 +720,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
-        if (!(DFactual.isEmpty() || txtEsquema.getText().isEmpty()||txtPK.getText().isEmpty())) {
+        if (!(DFactual.isEmpty() || txtEsquema.getText().isEmpty() || txtPK.getText().isEmpty())) {
             Hashtable<HashSet, HashSet> tabla = new Hashtable();
             atributosEsquema.removeAll(pkActual);
             //tabla.put(pkActual, atributosEsquema);
@@ -744,12 +742,13 @@ public class Principal extends javax.swing.JFrame {
             lstDeterminanteEsquema.setModel(new DefaultListModel());
             lstDeterminadoEsquema.setModel(new DefaultListModel());
             lstDF.setModel(new DefaultListModel());
-        }else if(DFactual.isEmpty()){
-            JOptionPane.showMessageDialog(null,"No ha agregado dependencias funcionales" , "Aviso", 2);
-        }else if(txtEsquema.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null,"El esquema Relacional no tiene atributos" , "Aviso", 2);
-        }else if(txtPK.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null,"No ha agregado una clave primaria" , "Aviso", 2);
+            DFactual=new Hashtable();
+        } else if (DFactual.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No ha agregado dependencias funcionales", "Aviso", 2);
+        } else if (txtEsquema.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El esquema Relacional no tiene atributos", "Aviso", 2);
+        } else if (txtPK.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No ha agregado una clave primaria", "Aviso", 2);
         }
     }//GEN-LAST:event_jButton2MouseClicked
 
@@ -826,6 +825,17 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton3MouseClicked
 
+    private void btnNormalizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNormalizarMouseClicked
+        // TODO add your handling code here:
+        if (lstEsquemas.getModel().getSize() > 0) {
+            HashSet<Esquema> fn2 = FN2((Esquema) lstEsquemas.getSelectedValue());
+            System.out.println("2FN:");
+            for (int i = 0; i < fn2.toArray().length; i++) {
+                System.out.println(fn2.toArray()[i]);
+            }
+        }
+    }//GEN-LAST:event_btnNormalizarMouseClicked
+
     private void actualizarComboBox() {
         DefaultListModel mod = new DefaultListModel();
         DefaultComboBoxModel modelo = new DefaultComboBoxModel();
@@ -859,6 +869,97 @@ public class Principal extends javax.swing.JFrame {
                 txtAtributo.setText("");
             }
         }
+    }
+
+    private HashSet<Esquema> FN2(Esquema e) {
+        //Opcion 1
+        //descomponer la clave primaria en todas las posibles combinaciones que tiene
+        //buscar cada combinacion en las dependencias funcionales para ver que determinan
+        //Si determina algo, agregar a "relaciones" un nuevo esquema que tenga como llave la 
+        //combinacion y como atributos a lo que determina
+
+        //Opcion 2
+        //Para cada dependencia funcional
+        //buscar el determinante de la dependencia funcional en la clave primaria
+        //Si lo encuentra, agregar a "relaciones" un nuevo esquema que tenga como llave el 
+        //determinante de la DF y como atributos a lo que determina
+        HashSet<Esquema> relaciones = new HashSet();
+        boolean encontro = false;
+        Set set = e.getDF().entrySet();
+        Esquema temp = e;
+        Iterator it = set.iterator();
+        int cont = 0;
+        System.out.println("PK:" + e.getPK());
+        System.out.println("temp antes " + temp);
+        while (it.hasNext()) {
+            Map.Entry entry = (Map.Entry) it.next();
+            System.out.println("Buscando " + (HashSet) entry.getKey() + " en " + e.getPK());
+            if (e.getPK().containsAll((HashSet) entry.getKey())) {
+                System.out.println("Encontró");
+                if (((HashSet) entry.getKey()).containsAll(e.getPK())) {
+                    System.out.println("******");
+                    encontro = true;
+                    //relaciones.add(new Esquema((HashSet) entry.getKey(), (HashSet) entry.getValue(), e.getDF(), "2FN", e.getNombre() + "" + relaciones.size()));
+                } else {
+                    temp.getAtributos().removeAll((HashSet) entry.getKey());
+                    temp.getAtributos().removeAll((HashSet) entry.getValue());
+                    HashSet<String> atrs=new HashSet();
+                    for (int i = 0; i < ((HashSet)entry.getValue()).toArray().length; i++) {
+                        atrs.add((String)((HashSet)entry.getValue()).toArray()[i]);
+                        atrs.addAll(aquedetermina(e.getDF(),(String)((HashSet)entry.getValue()).toArray()[i]));
+                    }
+                    relaciones.add(new Esquema((HashSet) entry.getKey(), atrs, e.getDF(), "2FN", e.getNombre() + "" + relaciones.size()));
+                }
+            }
+
+        }
+        System.out.println("temp despues" + temp);
+        if (encontro) {
+            relaciones.add(temp);
+        }
+        //Comparar relacion con relacion de el HashSet de Esquemas relaciones
+        for (int i = 0; i < relaciones.size(); i++) {
+            for (int j = 0; j < relaciones.size(); j++) {
+                if(relaciones.toArray()[i].equals(relaciones.toArray()[j])){
+                }else{
+                    //Si una llave contiene toda la otra llave
+                    if(((Esquema)relaciones.toArray()[i]).getPK().containsAll(((Esquema)relaciones.toArray()[j]).getPK())){
+                        //eliminarle a la llave padre los atributos de la llave hija
+                        System.out.println(((Esquema)relaciones.toArray()[i]).getPK()+ " contiene a " +((Esquema)relaciones.toArray()[j]).getPK());
+                        System.out.println("antes tenía"+((Esquema)relaciones.toArray()[i]).getAtributos());
+                        ((Esquema)relaciones.toArray()[i]).getAtributos().removeAll(((Esquema)relaciones.toArray()[j]).getAtributos());
+                        System.out.println("ahora tiene"+((Esquema)relaciones.toArray()[i]).getAtributos());
+                    }
+                }
+            }
+        }
+        
+        return relaciones;
+    }
+
+    public HashSet<String> aquedetermina(Hashtable<HashSet, HashSet> DF, String determinante) {
+        Set set = DF.entrySet();
+        Iterator it = set.iterator();
+        HashSet<String> determinados=new HashSet();
+        while (it.hasNext()) {
+            Map.Entry entry = (Map.Entry) it.next();
+            if(((HashSet)entry.getKey()).contains(determinante)){
+                determinados.addAll((HashSet)entry.getValue());
+            }
+        }
+        return determinados;
+    }
+
+    private HashSet<Esquema> FN3(HashSet<Esquema> e, Hashtable<HashSet, HashSet> DF) {
+        //Opcion 1
+        //Para cada relacion descomponer los atributos que son determinados
+        //Buscar los atributos que son determinados para ver si determinan algo en las dependencias funcionales
+
+        //Opcion 2
+        //Para cada dependencia funcional
+        //Buscar en lo determinado de las relaciones los determinantes de cada dependencia funcional
+        HashSet<Esquema> relaciones = new HashSet();
+        return relaciones;
     }
 
     private void addAtributoEsquema() {
@@ -909,7 +1010,6 @@ public class Principal extends javax.swing.JFrame {
         Set set = m.entrySet();
         Iterator it = set.iterator();
         int cont = 0;
-        boolean segunda = false;
         while (it.hasNext()) {
             Map.Entry entry = (Map.Entry) it.next();
             //Si es el primer elemento
@@ -948,13 +1048,6 @@ public class Principal extends javax.swing.JFrame {
                             temp.removeAll((HashSet) entry.getValue());
                             temp.addAll((HashSet) entry.getKey());
                             ccs.add(temp);
-                            if (!it.hasNext()) {
-                                if (!segunda) {
-                                    it = set.iterator();
-                                    System.out.println("***/*/*/*/*");
-                                    segunda = true;
-                                }
-                            }
                             continue;
                         } else {
                             for (int i = 0; i < claveCandidata.size(); i++) {
@@ -986,14 +1079,6 @@ public class Principal extends javax.swing.JFrame {
             }
             System.out.println("Actualmente " + claveCandidata + " determina a " + values);
             cont++;
-            if (!it.hasNext()) {
-                if (!segunda) {
-                    it = set.iterator();
-                    System.out.println("***/*/*/*/*");
-                    segunda = true;
-                }
-            }
-            System.out.println("segunda" + segunda);
         }
         System.out.println("Clave Candidata es " + claveCandidata + " determina a " + values);
         ccs.add(claveCandidata);

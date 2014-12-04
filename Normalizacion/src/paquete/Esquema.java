@@ -16,11 +16,11 @@ import java.util.Set;
  */
 public class Esquema {
 
-    HashSet PK;
-    HashSet atributos;
-    Hashtable<HashSet, HashSet> DF;
-    String forma;
-    String nombre;
+    private HashSet<String> PK;
+    private HashSet<String> atributos;
+    private Hashtable<HashSet, HashSet> DF;
+    private String forma;
+    private String nombre;
 
     public Esquema(HashSet PK, HashSet atributos, Hashtable<HashSet, HashSet> DF, String forma, String nombre) {
         this.PK = PK;
@@ -30,25 +30,28 @@ public class Esquema {
         this.nombre = nombre;
     }
 
-    
-
-    public String getNombre() {
-        return nombre;
+    public HashSet<String> getPK() {
+        return PK;
     }
 
-    public void setNombre(String Nombre) {
-        this.nombre = Nombre;
+    public void setPK(HashSet<String> PK) {
+        this.PK = PK;
     }
 
-    public Esquema() {
+    public HashSet<String> getAtributos() {
+        return atributos;
     }
 
-    public Hashtable<HashSet, HashSet> getTabla() {
+    public void setAtributos(HashSet<String> atributos) {
+        this.atributos = atributos;
+    }
+
+    public Hashtable<HashSet, HashSet> getDF() {
         return DF;
     }
 
-    public void setTabla(Hashtable<HashSet, HashSet> tabla) {
-        this.DF = tabla;
+    public void setDF(Hashtable<HashSet, HashSet> DF) {
+        this.DF = DF;
     }
 
     public String getForma() {
@@ -58,6 +61,17 @@ public class Esquema {
     public void setForma(String forma) {
         this.forma = forma;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    
+
 
     @Override
     public String toString() {
