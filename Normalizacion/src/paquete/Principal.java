@@ -80,7 +80,7 @@ public class Principal extends javax.swing.JFrame {
         txtPK = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jEditorPane1 = new javax.swing.JEditorPane();
+        txtEsquemas = new javax.swing.JEditorPane();
         jLabel9 = new javax.swing.JLabel();
         btnAddAtr = new javax.swing.JButton();
         cmbAtr = new javax.swing.JComboBox();
@@ -301,7 +301,7 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel8.setText("Clave primaria");
 
-        jScrollPane6.setViewportView(jEditorPane1);
+        jScrollPane6.setViewportView(txtEsquemas);
 
         jLabel9.setText("Esquemas relacionales normalizados");
 
@@ -742,7 +742,7 @@ public class Principal extends javax.swing.JFrame {
             lstDeterminanteEsquema.setModel(new DefaultListModel());
             lstDeterminadoEsquema.setModel(new DefaultListModel());
             lstDF.setModel(new DefaultListModel());
-            DFactual=new Hashtable();
+            DFactual = new Hashtable();
         } else if (DFactual.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No ha agregado dependencias funcionales", "Aviso", 2);
         } else if (txtEsquema.getText().isEmpty()) {
@@ -829,10 +829,24 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (lstEsquemas.getModel().getSize() > 0) {
             HashSet<Esquema> fn2 = FN2((Esquema) lstEsquemas.getSelectedValue());
+            String forma2 = "", forma3 = "";
             System.out.println("2FN:");
             for (int i = 0; i < fn2.toArray().length; i++) {
+                forma2 += ((Esquema) fn2.toArray()[i]).getNombre() + "{" + ((Esquema) fn2.toArray()[i]).getPK() + ", " + ((Esquema) fn2.toArray()[i]).getAtributos() + "}\n";
                 System.out.println(fn2.toArray()[i]);
             }
+            HashSet<Esquema> fn3 = FN3(fn2, ((Esquema) lstEsquemas.getSelectedValue()).getDF());
+            System.out.println("\n3FN:");
+            for (int i = 0; i < fn3.toArray().length; i++) {
+                forma3 += ((Esquema) fn3.toArray()[i]).getNombre() + "{" + ((Esquema) fn3.toArray()[i]).getPK() + ", " + ((Esquema) fn3.toArray()[i]).getAtributos() + "}\n";
+                System.out.println(fn3.toArray()[i]);
+            }
+            txtEsquemas.setText(txtEsquemas.getText()
+                    + "FN1:\n"
+                    + ((Esquema) lstEsquemas.getSelectedValue()).getNombre()
+                    + "{" + ((Esquema) lstEsquemas.getSelectedValue()).getPK()
+                    + "," + ((Esquema) lstEsquemas.getSelectedValue()).getAtributos()
+                    + "\n FN2:\n" + forma2 + "\nFN3:\n" + forma3);
         }
     }//GEN-LAST:event_btnNormalizarMouseClicked
 
@@ -903,10 +917,10 @@ public class Principal extends javax.swing.JFrame {
                 } else {
                     temp.getAtributos().removeAll((HashSet) entry.getKey());
                     temp.getAtributos().removeAll((HashSet) entry.getValue());
-                    HashSet<String> atrs=new HashSet();
-                    for (int i = 0; i < ((HashSet)entry.getValue()).toArray().length; i++) {
-                        atrs.add((String)((HashSet)entry.getValue()).toArray()[i]);
-                        atrs.addAll(aquedetermina(e.getDF(),(String)((HashSet)entry.getValue()).toArray()[i]));
+                    HashSet<String> atrs = new HashSet();
+                    for (int i = 0; i < ((HashSet) entry.getValue()).toArray().length; i++) {
+                        atrs.add((String) ((HashSet) entry.getValue()).toArray()[i]);
+                        atrs.addAll(aquedetermina(e.getDF(), (String) ((HashSet) entry.getValue()).toArray()[i]));
                     }
                     relaciones.add(new Esquema((HashSet) entry.getKey(), atrs, e.getDF(), "2FN", e.getNombre() + "" + relaciones.size()));
                 }
@@ -920,31 +934,31 @@ public class Principal extends javax.swing.JFrame {
         //Comparar relacion con relacion de el HashSet de Esquemas relaciones
         for (int i = 0; i < relaciones.size(); i++) {
             for (int j = 0; j < relaciones.size(); j++) {
-                if(relaciones.toArray()[i].equals(relaciones.toArray()[j])){
-                }else{
+                if (relaciones.toArray()[i].equals(relaciones.toArray()[j])) {
+                } else {
                     //Si una llave contiene toda la otra llave
-                    if(((Esquema)relaciones.toArray()[i]).getPK().containsAll(((Esquema)relaciones.toArray()[j]).getPK())){
+                    if (((Esquema) relaciones.toArray()[i]).getPK().containsAll(((Esquema) relaciones.toArray()[j]).getPK())) {
                         //eliminarle a la llave padre los atributos de la llave hija
-                        System.out.println(((Esquema)relaciones.toArray()[i]).getPK()+ " contiene a " +((Esquema)relaciones.toArray()[j]).getPK());
-                        System.out.println("antes tenía"+((Esquema)relaciones.toArray()[i]).getAtributos());
-                        ((Esquema)relaciones.toArray()[i]).getAtributos().removeAll(((Esquema)relaciones.toArray()[j]).getAtributos());
-                        System.out.println("ahora tiene"+((Esquema)relaciones.toArray()[i]).getAtributos());
+                        System.out.println(((Esquema) relaciones.toArray()[i]).getPK() + " contiene a " + ((Esquema) relaciones.toArray()[j]).getPK());
+                        System.out.println("antes tenía" + ((Esquema) relaciones.toArray()[i]).getAtributos());
+                        ((Esquema) relaciones.toArray()[i]).getAtributos().removeAll(((Esquema) relaciones.toArray()[j]).getAtributos());
+                        System.out.println("ahora tiene" + ((Esquema) relaciones.toArray()[i]).getAtributos());
                     }
                 }
             }
         }
-        
+
         return relaciones;
     }
 
     public HashSet<String> aquedetermina(Hashtable<HashSet, HashSet> DF, String determinante) {
         Set set = DF.entrySet();
         Iterator it = set.iterator();
-        HashSet<String> determinados=new HashSet();
+        HashSet<String> determinados = new HashSet();
         while (it.hasNext()) {
             Map.Entry entry = (Map.Entry) it.next();
-            if(((HashSet)entry.getKey()).contains(determinante)){
-                determinados.addAll((HashSet)entry.getValue());
+            if (((HashSet) entry.getKey()).contains(determinante)) {
+                determinados.addAll((HashSet) entry.getValue());
             }
         }
         return determinados;
@@ -958,8 +972,27 @@ public class Principal extends javax.swing.JFrame {
         //Opcion 2
         //Para cada dependencia funcional
         //Buscar en lo determinado de las relaciones los determinantes de cada dependencia funcional
-        HashSet<Esquema> relaciones = new HashSet();
-        return relaciones;
+        //HashSet<Esquema> relaciones = new HashSet();
+        Set set = DF.entrySet();
+        Iterator it = set.iterator();
+        while (it.hasNext()) {
+            Map.Entry entry = (Map.Entry) it.next();
+            for (int i = 0; i < e.size(); i++) {
+                for (int j = 0; j < ((Esquema) e.toArray()[i]).getAtributos().size(); j++) {
+                    //Si la relacion actual tiene todo el determinante de la dependencia funcional
+                    if (((HashSet) ((Esquema) e.toArray()[i]).getAtributos()).containsAll((HashSet) entry.getKey())) {
+                        //elimina todos los atributos de esa relacion que se determinan en la dependencia funcional
+                        ((HashSet) ((Esquema) e.toArray()[i]).getAtributos()).removeAll((HashSet) entry.getValue());
+                        //Agregar una nueva relacion
+                        if (!e.contains(new Esquema((HashSet) entry.getKey(), (HashSet) entry.getValue(), DF, "3FN", ((Esquema) e.toArray()[i]).getNombre() + e.size()))) {
+                            e.add(new Esquema((HashSet) entry.getKey(), (HashSet) entry.getValue(), DF, "3FN", ((Esquema) e.toArray()[i]).getNombre() + e.size()));
+                        }
+                    }
+                }
+            }
+        }
+        //Eliminar repetidos
+        return e;
     }
 
     private void addAtributoEsquema() {
@@ -1143,7 +1176,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -1178,6 +1210,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField txtAtributo;
     private javax.swing.JTextField txtClave;
     private javax.swing.JTextField txtEsquema;
+    private javax.swing.JEditorPane txtEsquemas;
     private javax.swing.JTextField txtNombreAtributo;
     private javax.swing.JTextField txtNombreEsquema;
     private javax.swing.JTextField txtPK;

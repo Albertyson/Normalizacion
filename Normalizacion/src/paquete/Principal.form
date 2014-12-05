@@ -598,7 +598,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JEditorPane" name="jEditorPane1">
+                    <Component class="javax.swing.JEditorPane" name="txtEsquemas">
                     </Component>
                   </SubComponents>
                 </Container>
