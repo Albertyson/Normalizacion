@@ -22,6 +22,17 @@ public class Esquema {
     private String forma;
     private String nombre;
 
+    public Esquema() {
+    }
+
+    public Esquema(Esquema e) {
+        this.PK = e.getPK();
+        this.atributos = e.getAtributos();
+        this.DF = e.getDF();
+        this.forma = e.forma;
+        this.nombre = e.nombre;
+    }
+
     public Esquema(HashSet PK, HashSet atributos, Hashtable<HashSet, HashSet> DF, String forma, String nombre) {
         this.PK = PK;
         this.atributos = atributos;
@@ -70,24 +81,21 @@ public class Esquema {
         this.nombre = nombre;
     }
 
-    
-
-
     @Override
     public String toString() {
-        String retorno = nombre + "{"+PK+","+atributos+"} DF:{";
+        String retorno = nombre + "{" + PK + "," + atributos + "} DF:{";
         Set set = DF.entrySet();
         Iterator it = set.iterator();
         while (it.hasNext()) {
             Map.Entry entry = (Map.Entry) it.next();
-            if(it.hasNext()){
-                retorno+=((HashSet)entry.getKey()).toString() +"→"+((HashSet)entry.getValue()).toString()+",";
-            }else{
-                retorno+=((HashSet)entry.getKey()).toString() +"→"+((HashSet)entry.getValue()).toString();
+            if (it.hasNext()) {
+                retorno += ((HashSet) entry.getKey()).toString() + "→" + ((HashSet) entry.getValue()).toString() + ",";
+            } else {
+                retorno += ((HashSet) entry.getKey()).toString() + "→" + ((HashSet) entry.getValue()).toString();
             }
-            
+
         }
-        retorno+="}";
+        retorno += "}";
         return retorno;
     }
 }
