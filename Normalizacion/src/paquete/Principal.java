@@ -829,11 +829,25 @@ public class Principal extends javax.swing.JFrame {
     private void btnNormalizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNormalizarMouseClicked
         // TODO add your handling code here:
         if (lstEsquemas.getModel().getSize() > 0) {
-            final Esquema f1 = new Esquema(((Esquema) lstEsquemas.getSelectedValue()).getPK(), ((Esquema) lstEsquemas.getSelectedValue()).getAtributos(), ((Esquema) lstEsquemas.getSelectedValue()).getDF(), ((Esquema) lstEsquemas.getSelectedValue()).getForma(), ((Esquema) lstEsquemas.getSelectedValue()).getNombre());
+            HashSet<String> PK = ((Esquema) lstEsquemas.getSelectedValue()).getPK();
+            HashSet<String> atributos2 = ((Esquema) lstEsquemas.getSelectedValue()).getAtributos();
+            Hashtable<HashSet, HashSet> DF = ((Esquema) lstEsquemas.getSelectedValue()).getDF();
+            String forma = ((Esquema) lstEsquemas.getSelectedValue()).getForma();
+            String nombre = ((Esquema) lstEsquemas.getSelectedValue()).getNombre();
+            final Esquema f1 = new Esquema();                        
+            f1.setAtributos(atributos2);
+            f1.setDF(DF);
+            f1.setForma(forma);
+            f1.setPK(PK);
+            f1.setNombre(nombre);
             String forma1 =
                     f1.getNombre()
                     + "{" + f1.getPK()
                     + ", " + f1.getAtributos() + "}\n";
+            String a[] = new String[f1.getAtributos().size()];
+            for (int i = 0; i < a.length; i++) {
+                a[i] = (String)f1.getAtributos().toArray()[i];
+            }
             HashSet<Esquema> fn2 = FN2(new Esquema(f1.getPK(), f1.getAtributos(), f1.getDF(), f1.getForma(), f1.getNombre()));
 
             String forma2 = "", forma3 = "";
@@ -853,10 +867,15 @@ public class Principal extends javax.swing.JFrame {
                     + "\nFN2:\n" + forma2
                     + "\nFN3:\n" + forma3 + "\n");
             DefaultListModel modelo = new DefaultListModel();
-            for (int i = 0; i < esquemas.size(); i++) {
-                System.out.println(esquemas.get(i));
-                modelo.addElement(esquemas.get(i));
+            HashSet<String> atr = new HashSet();
+            for (int i = 0; i < a.length; i++) {
+                atr.add(a[i]);
             }
+           esquemas.get(lstEsquemas.getSelectedIndex()).setAtributos(atr);
+            for (int i = 0; i < esquemas.size(); i++) {
+                System.out.println(esquemas.get(i));                
+                modelo.addElement(esquemas.get(i));
+            }           
             lstEsquemas.setModel(modelo);
         }
     }//GEN-LAST:event_btnNormalizarMouseClicked
